@@ -1,7 +1,6 @@
-package ru.job4j.inherit.engineer;
+package ru.job4j.inheritance.engineer;
 
-import ru.job4j.inherit.Profession;
-import ru.job4j.inherit.engineer.Project;
+import ru.job4j.inheritance.Profession;
 
 public class Engineer extends Profession {
     private Project project;

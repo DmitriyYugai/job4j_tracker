@@ -1,6 +1,6 @@
-package ru.job4j.inherit.programmer;
+package ru.job4j.inheritance.programmer;
 
-import ru.job4j.inherit.engineer.Engineer;
+import ru.job4j.inheritance.engineer.Engineer;
 
 public class Programmer extends Engineer {
     private Notebook notebook;

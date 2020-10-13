@@ -1,6 +1,6 @@
-package ru.job4j.inherit.dentist;
+package ru.job4j.inheritance.dentist;
 
-import ru.job4j.inherit.doctor.Doctor;
+import ru.job4j.inheritance.doctor.Doctor;
 
 public class Dentist extends Doctor {
     private Drill drill;

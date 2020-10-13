@@ -1,4 +1,4 @@
-package ru.job4j.inherit;
+package ru.job4j.inheritance;
 
 import java.util.Calendar;
 
