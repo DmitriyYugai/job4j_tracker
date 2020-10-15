@@ -23,8 +23,12 @@ public class Matches {
             }
         }
         numberOfMatches = numberOfMatches - num;
-        System.out.println("Игрок " + numberOfPlayer + " сделал свой ход. "
-                            + "Спичек осталось: " + numberOfMatches);
+        if (numberOfMatches > 0) {
+            System.out.println("Игрок " + numberOfPlayer + " сделал свой ход. "
+                    + "Спичек осталось: " + numberOfMatches);
+        } else {
+            System.out.println("Игрок " + numberOfPlayer + " победил!");
+        }
     }
 
     public static void main(String[] args) {
