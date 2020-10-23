@@ -22,12 +22,7 @@ public class Departments {
     }
 
     public static void sortDesc(List<String> orgs) {
-        Collections.sort(orgs, new DepDescCompFirst());
-        Collections.sort(orgs, new DepDescCompSecond());
-//        List<String> subList = new ArrayList<>();
-//        for (String org : orgs) {
-//            if
-//        }
+        Collections.sort(orgs, new DepDescComp());
     }
 
 }
