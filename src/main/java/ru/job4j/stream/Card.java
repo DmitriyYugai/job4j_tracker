@@ -9,6 +9,10 @@ public class Card {
         this.value = value;
     }
 
+    public Card(Suit suit) {
+        this.suit = suit;
+    }
+
     public Suit getSuit() {
         return suit;
     }
