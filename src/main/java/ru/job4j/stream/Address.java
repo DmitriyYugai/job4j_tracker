@@ -15,6 +15,10 @@ public class Address {
         this.apartment = apartment;
     }
 
+    public Address(String city) {
+        this.city = city;
+    }
+
     public String getCity() {
         return city;
     }
