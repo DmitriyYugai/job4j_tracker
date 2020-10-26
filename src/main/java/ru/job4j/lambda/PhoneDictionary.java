@@ -11,7 +11,7 @@ public class PhoneDictionary {
     }
 
     public ArrayList<Person> find(String key) {
-        Predicate<Person> firstCond = person -> person.getName().equals(key);
+        Predicate<Person> firstCond = person -> person.getName().contains(key);
         Predicate<Person> combine = firstCond.or(person -> person.getSurname().equals(key))
                                              .or(person -> person.getAddress().equals(key))
                                              .or(person -> person.getPhone().equals(key));
