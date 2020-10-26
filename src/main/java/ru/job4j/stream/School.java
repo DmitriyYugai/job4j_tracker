@@ -14,10 +14,10 @@ public class School {
 
     public Map<String, Student> collect(List<Student> students) {
         return students.stream()
-                .filter(student -> student.getScore() >= 50)
                 .collect(Collectors.toMap(
                         Student::getSurname,
-                        student -> student
+                        student -> student,
+                        (s1, s2) -> s1
                 ));
     }
 }
