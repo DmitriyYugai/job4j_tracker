@@ -67,7 +67,7 @@ public class JobTest {
                 new Job("eee", 5)
         );
         Comparator<Job> cmpNamePriority = new JobAscByName().thenComparing(new JobDescByPriority());
-        List<Job> expected = Arrays.asList(
+        List<Job> expected = List.of(
                 new Job("ccc", 5),
                 new Job("ddd", 5),
                 new Job("eee", 5),
@@ -90,7 +90,7 @@ public class JobTest {
                 new Job("eee", 5)
         );
         Comparator<Job> cmpNamePriority = new JobAscByPriority().thenComparing(new JobDescByName());
-        List<Job> expected = Arrays.asList(
+        List<Job> expected = List.of(
                 new Job("fff", 1),
                 new Job("fff", 3),
                 new Job("fff", 5),
