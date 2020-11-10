@@ -8,8 +8,8 @@ public class TrackerSingletone1Test {
 
     @Test
     public void whenGetInstance() {
-        Tracker ts1 = TrackerSingletone1.getInstance();
-        Tracker ts2 = TrackerSingletone1.getInstance();
+        MemTracker ts1 = TrackerSingletone1.getInstance();
+        MemTracker ts2 = TrackerSingletone1.getInstance();
         assertSame(ts1, ts2);
     }
 

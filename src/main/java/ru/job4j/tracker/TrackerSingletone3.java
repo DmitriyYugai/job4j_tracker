@@ -5,7 +5,7 @@ import java.util.List;
 public enum TrackerSingletone3 {
     INSTANCE;
 
-    private final Tracker tracker = new Tracker();
+    private final MemTracker tracker = new MemTracker();
 
     public Item add(Item item) {
         return tracker.add(item);
