@@ -1,68 +1,85 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Statement;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;
 
 public class StartUITest {
+    private SqlTracker tracker = new SqlTracker();
+    private Output out;
+
+    @Before
+    public void init() {
+        out = new StubOutput();
+        tracker.init();
+        String sqlDrop = "drop table if exists items";
+        String sqlCreate = "create table items(id serial primary key, name text)";
+        try (Statement st = tracker.getCn().createStatement()) {
+            st.execute(sqlDrop);
+            st.execute(sqlCreate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @After
+    public void closeCon() throws Exception {
+        tracker.close();
+    }
 
     @Test
     public void whenCreateItem() {
-        Output output = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
         );
-        MemTracker tracker = new MemTracker();
         UserAction[] actions = {
-                new CreateAction(output),
+                new CreateAction(out),
                 new ExitAction()
         };
-        new StartUI(output).init(in, tracker, actions);
+        new StartUI(out).init(in, tracker, actions);
         assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
     public void whenReplaceItem() {
-        Output output = new StubOutput();
-        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
                 new String[] {"0", "1", replacedName, "1"}
         );
         UserAction[] actions = {
-                new ReplaceAction(output),
+                new ReplaceAction(out),
                 new ExitAction()
         };
-        new StartUI(output).init(in, tracker, actions);
+        new StartUI(out).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
 
     @Test
     public void whenDeleteItem() {
-        Output output = new StubOutput();
-        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
         );
         UserAction[] actions = {
-                new DeleteAction(output),
+                new DeleteAction(out),
                 new ExitAction()
         };
-        new StartUI(output).init(in, tracker, actions);
+        new StartUI(out).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 
     @Test
     public void whenFindAll() {
-        Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0", "1"}
         );
-        MemTracker tracker = new MemTracker();
         Item item1 = new Item("New Item 1");
         Item item2 = new Item("New Item 2");
         tracker.add(item1);
@@ -87,11 +104,9 @@ public class StartUITest {
 
     @Test
     public void whenFindById() {
-        Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0", "1", "1"}
         );
-        MemTracker tracker = new MemTracker();
         Item item1 = new Item("New Item 1");
         tracker.add(item1);
         UserAction[] actions = {
@@ -113,11 +128,9 @@ public class StartUITest {
 
     @Test
     public void whenFindByName() {
-        Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0", "New Item", "1"}
         );
-        MemTracker tracker = new MemTracker();
         Item item1 = new Item("New Item");
         Item item2 = new Item("New Item");
         tracker.add(item1);
@@ -142,11 +155,9 @@ public class StartUITest {
 
     @Test
     public void whenExit() {
-        Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0"}
         );
-        MemTracker tracker = new MemTracker();
         UserAction[] actions = {
                 new ExitAction()
         };
@@ -159,11 +170,9 @@ public class StartUITest {
 
     @Test
     public void whenInvalidExit() {
-        Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"2", "0"}
         );
-        MemTracker tracker = new MemTracker();
         UserAction[] actions = {
                 new ExitAction()
         };
