@@ -15,8 +15,8 @@ public class UserTest {
     public void whenAsc() {
         Set<User> users = Set.of(new User("Petr", 32), new User("Ivan", 31));
         Iterator<User> it = users.iterator();
-        assertThat(it.next(), is(new User("Ivan", 31)));
         assertThat(it.next(), is(new User("Petr", 32)));
+        assertThat(it.next(), is(new User("Ivan", 31)));
     }
 
     @Test
