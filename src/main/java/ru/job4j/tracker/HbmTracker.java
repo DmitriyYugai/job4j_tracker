@@ -33,7 +33,10 @@ public class HbmTracker implements Store, AutoCloseable {
     public boolean replace(int id, Item item) {
         Session session = sf.openSession();
         session.beginTransaction();
-        session.update(item);
+        session.createQuery("update Item i set i.name = :name where i.id = :id")
+                .setParameter("name", item.getName())
+                .setParameter("id", id)
+                .executeUpdate();
         session.getTransaction().commit();
         session.close();
         return true;
@@ -65,8 +68,10 @@ public class HbmTracker implements Store, AutoCloseable {
     public List<Item> findByName(String key) {
         Session session = sf.openSession();
         session.beginTransaction();
-        List result = session.createQuery(
-                "from ru.job4j.tracker.Item item where item.name=" + key).list();
+        List<Item> result = session.createQuery(
+                "from ru.job4j.tracker.Item item where item.name = :key")
+                .setParameter("key", key)
+                .list();
         session.getTransaction().commit();
         session.close();
         return result;
@@ -86,4 +91,5 @@ public class HbmTracker implements Store, AutoCloseable {
     public void close() throws Exception {
         StandardServiceRegistryBuilder.destroy(registry);
     }
+
 }
