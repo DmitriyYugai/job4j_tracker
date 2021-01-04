@@ -109,6 +109,6 @@ __*FindByIdAction*__, __*FindByNameAction*__, __*ReplaceAction*__ -
 Выйдем из программы:<br><br>
 ![Выход](img/usage/exit.PNG)<br>
 ## Контакты
-Почта: studentnstu97@mail.ru<br>
+Почта: dmitry_yugay@mail.ru<br>
 Skype: live:.cid.9cdc925fb48220b4
 
